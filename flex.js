@@ -11,7 +11,7 @@ let fin_date ='2023-10-05';
 let titre ="Pointage"
 
 // Heures au format "HH:mm"
-let heure1 = "07:00";
+let heure1 = "18:00";
 let heure2 = "06:00";
 let valNull =0;
 
