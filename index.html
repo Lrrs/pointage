@@ -2,113 +2,231 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <script type='text/javascript' src='jquery/jQuery v3.3.1.js'></script>
-    <script type='text/javascript' src='jquery/jquery.maskedinput.min.js'></script>
+    <link rel="stylesheet" href="main.css">
+
+    <!-- <link rel="stylesheet" href="css/fontawesome.css"> -->
 
 
-    <link rel="stylesheet" href="flex.css">
-    <title>E-mail : lorristombozandry@gmail.com</title>
 </head>
 <body>
-    <div class="container">
-        <div class="block" id="formBlock">
-          
-            <div id="entete">
-                <p id="af">👀  Recherche par Plage de Dates et heure</p>
 
-                <div class="toggle1">
-                    <img class="toggle11" src="m1.png" alt="menu"/>
-            
-                </div>
-            </div>
-            <!-- Votre formulaire ici -->
-            
-            <p id="titre"></p>
-    
-            <!-- Formulaire de Recherche -->
-
-            <!-- Date Initiale -->
-            <label for="dateIni">Date Initiale:</label>
-            <input type="date" id="dateIni" required>
-
-            <input type="time" id="heureIni" required value="18:30">
-            
-            <!-- Date Finale -->
-            <label for="dateFin" style="display: none;">Date Finale:</label>
-            <input type="date" id="dateFin" required style="display: none;">
-
-            <input type="time" id="heureFin" required value="06:00" style="display: none;">
-
-            <div class="file_">
-            <!-- Input pour le fichier CSV -->
-            <input type="file" id="fichierCSV" accept=".csv"></div>
-            
-            <div class="textarea-container">
-                <label for="Déscription">Déscription:</label>
-                <!-- Zone de texte avec l'ID "monTextarea" -->
-                <textarea id="champSaisie" placeholder="Saisissez votre texte ici..."></textarea>
-            </div>
-
-            <div class="checkbox" >
-                <label><input id="myCheckbox" type="checkbox" />Gardien</label>
-                
-              </div>
-            
-            <!-- Bouton pour Convertir CSV en JSON -->
-            <button type="button" id="importerCSV">Valider</button>
-
+    <section id="menu">
+        <div class="logo">
+            <img src="images/logo.JPG" alt="">
+            <h3>Lorris</h3>
         </div>
-        
-        <div class="block" id="tableBlock">
-            <div id="entete">
-                <p id="affichageValeur">Pointage</p>
-                
 
-                <div class="toggle2">
-                    <img class="toggle22" src="m1.png" alt="menu"/>
+        <div class="items">     
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-inboxes-fill mr-2" viewBox="0 0 16 16"><path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z"/></svg> </i><a href="index.html">Pointage</a></li>
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-journal-bookmark mr-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></svg></i><a href="{{ url_for('get_registre') }}"> Registre</a></li>
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16"><path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/><path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/></svg></i><a href="{{ url_for('parametre') }}"> paramètre</a></li>
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-inboxes-fill mr-2" viewBox="0 0 16 16"><path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z"/></svg> </i><a href="{{ url_for('home_page') }}">Produits</a></li>
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-journal-bookmark mr-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></svg></i><a href="{{ url_for('get_registre') }}"> Registre</a></li>
+                <li><i><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16"><path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/><path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/></svg></i><a href="parametre.html"> paramètre</a></li>   
+        </div>
+    </section>
+
+    <section id="interface">
+
+        <div id="none">
+            <div class="navigation">
+                <div class="n1">
+
+                    <div>
+                        <i id="menu-btn"  onclick="menuL()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                          </svg> </i>
+                    </div>
+
+                </div>
             
+                <div class="profile">
+                    <i class="far fa-bell"></i>
+                    <img src="images/1.jpg" alt="" onclick="imprimerFormulaire()">
                 </div>
             </div>
+        </div>
 
+<div class="nav2">
+    <div id="pointage-btn"  >
+        <!-- <h3 class="i-name" > Pointage</h3> -->
+        <img src="images/tele.png" alt="" style="height: 30px;width: 150px; margin-left: 30px; border-radius: 8px;" onclick="Tele()">
 
-            <!-- Votre tableau ici -->
-
-            <div class="table-container">
-
-                <form>
-                    <table class="table table-bordered" id="tabmodel">
-            
-                        <thead>
-                            <tr>
-                                <th>💂 Nom</th>
-                                <th>📅 Date</th>
-                                <th>🕑 Heure</th>
-                            </tr>
-                        </thead>
-                            <tbody id="ttbody" >
-
-                            </tbody>
-                            
-                    </table>
-
-                   <!-- Bouton d'impression 
-                    <button type="button" onclick="imprimerFormulaire()">Imprimer </button>                   
-                     Bouton d'impression -->
-
-
-                    <div class=".toggle0">
-                        <img class="imp" src="imp.png" alt="menu" onclick="imprimerFormulaire()"/>
-                
-                    </div>
-                 </form>
-      
     </div>
 
-    <script src="flex.js"></script>
-    <script src="p.js"></script>
+    <div id="nav2-btn">
+        <img src="images/imp.png" alt="" onclick="imprimerFormulaire()" style="cursor: pointer;">
+    </div>
+
+</div>
+        <div id="none2">
+            <div id="popUp">
+
+                <div id="popUpContent">
+                    <div class="search">
+                        <i class="far fa-search"></i>
+                        <!-- <input type="text" placeholder="Search"> -->
+                        <input type="date" id="dateIni" required style="margin:10px; " >
+                        <input type="time" id="heureIni" required value="07:00" style="margin:10px; ">
+                    </div>
+
+                        <div class="file_" ><input type="file" id="fichierCSV" accept=".csv"  style="width: 300px ; background-color:#ffff; margin:10px; "></div>
+                       
+                       <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                        <button type="button" id="importerCSV" style="color: rgb(2, 120, 47);border-color: rgb(2, 120, 47);background-color: #ffff;cursor: pointer;">Valider</button> 
+                        <button type="button" onclick="Cancel()" style="color: red;border-color: red;background-color: #c7a6a686;cursor: pointer;">Cancel</button>
+                       </div> 
+
+                </div>
+
+            </div>
+
+            <div class="values">
+                <div class="val-box">
+                    <i><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-inboxes-fill mr-2" viewBox="0 0 16 16"><path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z"/></svg> </i><a href="{{ url_for('home_page') }}"></a>
+                    
+                    <div>
+                        <h3 id='perEff'>0</h3>
+                        <span>Efféctif.T</span>
+                    </div>
+                </div>
+
+                <div class="val-box">
+                    <i><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-bookmark mr-2" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></svg></i><a href="{{ url_for('get_registre') }}"></a>
+                    <div>
+                        <h3 id='perPre'>0</h3>
+                        <span>Présent</span>
+                    </div>
+                </div>
+
+                <div class="val-box">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <h3 id="perRet">0</h3>
+                        <span>Retard</span>
+                    </div>
+                </div>
+
+                <div class="val-box">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <h3 id="perAbs">0</h3>
+                        <span>Absent(e)</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+
+            <div class="board">
+                <table width="100%"  id="tabmodel">
+                    <thead>
+                        <tr>
+                            <td>Identifiant</td>
+                            <!-- <td>POSTE</td> -->
+                            <!-- <td>Statut</td> -->
+                            <td>Date</td>
+                            <td>Heure</td>
+                        </tr>
+                    </thead>
+                    <tbody id="ttbody">
+                          <!-- <tr>
+                            <td class="people">
+                                <img src="images/1.jpg" alt="">
+                                <div class="people-de">
+                                    <h5>Lorris TOMBOZANDRY </h5>
+                                    <p>lorristomboandry@gmail.com</p>
+                                </div>
+                            </td>
+
+                            <td class="people-des">
+                                <h5>Software Enginee</h5>
+                                <p>Web dev</p>
+                            </td>
+
+                            <td class="active"><p>Active</p></td>
+
+                            <td class="role">
+                                <p>Owner</p>
+                            </td>
+
+                            <td class="edit"><a href="#">Edit</a></td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="people">
+                                <img src="images/1.jpg" alt="">
+                                <div class="people-de">
+                                    <h5>Lorris TOMBOZANDRY </h5>
+                                    <p>lorristomboandry@gmail.com</p>
+                                </div>
+                            </td>
+
+                            <td class="people-des">
+                                <h5>Software Enginee</h5>
+                                <p>Web dev</p>
+                            </td>
+
+                            <td class="active"><p>Active</p></td>
+
+                            <td class="role">
+                                <p>Owner</p>
+                            </td>
+
+                            <td class="edit"><a href="#">Edit</a></td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td class="people">
+                                <img src="images/1.jpg" alt="">
+                                <div class="people-de">
+                                    <h5>Lorris TOMBOZANDRY </h5>
+                                    <p>lorristomboandry@gmail.com</p>
+                                </div>
+                            </td>
+
+                            <td class="people-des">
+                                <h5>Software Enginee</h5>
+                                <p>Web dev</p>
+                            </td>
+
+                            <td class="active"><p>Active</p></td>
+
+                            <td class="role">
+                                <p>Owner</p>
+                            </td>
+
+                            <td class="edit"><a href="#">Edit</a></td>
+
+
+                        </tr>
+
+                        -->
+                         
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        
+
+
+    </section>
+
+
+
+
+    
 </body>
-</html>
+
+<script src="main.js"></script>
+
+</html> 
