@@ -165,6 +165,9 @@ function dataRecu() {
 
 function affdata(data2) {
 
+        viderTableau();
+
+
     const ddd=document.querySelector("#popUp")
     ddd.style.display = 'none';
 
@@ -360,4 +363,9 @@ function Cancel(){
     dd.style.display = 'none';
 
 };
+
+function viderTableau() {
+    const tableau = document.getElementById("tabmodel").getElementsByTagName("tbody")[0];
+    tableau.innerHTML = ""; // Vide le contenu du <tbody>
+}
 
