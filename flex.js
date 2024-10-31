@@ -205,10 +205,34 @@ function affdata(data2) {
             // Créez et ajoutez la cellule pour la personne
             const personneCellule = document.createElement("td");
             personneCellule.className = "people";
-            const img = document.createElement("img");
-            let imgs = 'images/'+i.nom +'.jpg';
-            img.src = imgs|| 'images/default.jpg' // Utilisez une image par défaut si aucune image n'est fourni
 
+            
+        // Créez l'image avec un événement `onclick`
+        const img = document.createElement("img");
+        let imgs = 'images/' + i.nom + '.jpg';
+        img.src = imgs || 'images/default.jpg';
+        img.alt = "Éditer";
+        img.style.cursor = "pointer"; 
+
+        img.onclick = function() {
+            const rowIndex = ligne.rowIndex; // `ligne` est la <tr> qu'on vient de créer
+            editerLigne(rowIndex); // Appelle la fonction en passant l'index de la ligne du tableau HTML
+        };
+
+        personneCellule.appendChild(img);
+        ligne.appendChild(personneCellule);
+        document.getElementById("tabmodel").appendChild(ligne);
+        const ddEdit=document.querySelector("#popUpEdit")
+        const editHeure=document.querySelector("#editHeure")
+        const editNom=document.querySelector("#editNom")
+
+        function editerLigne(rowIndex) {
+            // alert("Édition de la ligne avec l'index HTML : " + rowIndex); // Correction de la syntaxe de `alert`
+            ddEdit.style.display = 'flex';
+            editNom.textContent=newData[rowIndex-1].nom;
+            editSelect=newData[rowIndex-1].Time;
+      
+        }
             
 
             console.log('images'+imgs);
@@ -225,26 +249,7 @@ function affdata(data2) {
             personneCellule.appendChild(divPeopleDe);
             ligne.appendChild(personneCellule);
 
-            // // Créez et ajoutez la cellule pour la description
-            // const descriptionCellule = document.createElement("td");
-            // descriptionCellule.className = "people-des";
-            // const h5Title = document.createElement("h5");
-            // h5Title.textContent = i.poste;
-            // const pDesc = document.createElement("p");
-            // pDesc.textContent = '';
-            // descriptionCellule.appendChild(h5Title);
-            // descriptionCellule.appendChild(pDesc);
-            // ligne.appendChild(descriptionCellule);
-
-            // Créez et ajoutez la cellule pour le statut
-
-            // const statusCellule = document.createElement("td");
-            // statusCellule.className = "active";
-            // const pStatus = document.createElement("p");
-            // pStatus.textContent = i.status;
-            // statusCellule.appendChild(pStatus);
-            // ligne.appendChild(statusCellule);
-
+    
 
 
 
