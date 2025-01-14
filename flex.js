@@ -19,7 +19,7 @@ let valNull =0;
 
 let dateModification;
 
-let Joyce="2028-11-16";
+let Joyce="2027-11-16";
 let dateActuel =  new Date().toJSON().slice(0, 10);
 
 
@@ -52,13 +52,13 @@ heure1 = document.getElementById("heureIni").value;
 // console.log("Heure Initiale:", heure1);
 
 
-//if (Joyce >= dateActuel) {
+if (Joyce >= dateActuel) {
         if (fichierCSV) {
             const reader = new FileReader();reader.onload = function(e) {const contenuCSV = e.target.result; jsonBruite = convertirCSVenJSON(contenuCSV); }; reader.readAsText(fichierCSV);
         } 
         else { alert("Veuillez sélectionner un fichier CSV."); }   
-//  } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
-//});
+  } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
+});
 
 
 function convertirCSVenJSON(contenuCSV) {
