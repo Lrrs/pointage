@@ -17,6 +17,8 @@ let heure1 = "18:00";
 let heure2 = "06:00";
 let valNull =0;
 
+let dateModification;
+
 let Joyce="2028-11-16";
 let dateActuel =  new Date().toJSON().slice(0, 10);
 
@@ -50,12 +52,13 @@ heure1 = document.getElementById("heureIni").value;
 // console.log("Heure Initiale:", heure1);
 
 
-if (Joyce >= dateActuel) {
+//if (Joyce >= dateActuel) {
         if (fichierCSV) {
             const reader = new FileReader();reader.onload = function(e) {const contenuCSV = e.target.result; jsonBruite = convertirCSVenJSON(contenuCSV); }; reader.readAsText(fichierCSV);
-        } else { alert("Veuillez sélectionner un fichier CSV."); }   
-    } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
-});
+        } 
+        else { alert("Veuillez sélectionner un fichier CSV."); }   
+//  } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
+//});
 
 
 function convertirCSVenJSON(contenuCSV) {
@@ -190,6 +193,8 @@ function affdata(data2) {
                         let achille = cleanedData.find(er=>{ return er.sName === E1; });
                         let st =''; st=(compareT(achille.Time,heure1)) ; newData.push({'id':achille.sJobNo ,'nom':achille.sName,'pdp':E1.nom,'poste':E1.poste,"Date": achille.Date,"Time":achille.Time,'status':st});
                         perPresent =perPresent +1
+
+                        dateModification =achille.Date;
                     }
             })
 
