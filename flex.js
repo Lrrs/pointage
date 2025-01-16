@@ -5,7 +5,12 @@ var jsonBruite =null;
 var jsonClnFltr =null;
 let PersonneBruite =[];
 let Personne =[];
+let newData=[];
+newDataUpdate=[];
+let iDSelect=null;
+let editSelect =null;
 
+let dateModification;
 
 const colonnesAInclure = ['sJobNo','sName', 'Date', 'Time'];
 let init_date ='2023-10-04';
@@ -17,16 +22,18 @@ let heure1 = "18:00";
 let heure2 = "06:00";
 let valNull =0;
 
-let dateModification;
-
-let Joyce="2027-11-16";
+let Joyce="2035-02-16";
 let dateActuel =  new Date().toJSON().slice(0, 10);
+
+let dateAujourdhui=null;
 
 
 let objetsActifs1 = []; // Déclaration du tableau pour stocker les objets filtrés
 let objetsActifs2 = []; // Déclaration du tableau pour stocker les objets filtrés
 let objetsActifs = []; // Déclaration du tableau pour stocker les objets filtrés
 let objetsActifsMatin = []; // Déclaration du tableau pour stocker les objets filtrés
+
+let dataPrepared = true;
 
 
 function heureEnMinutes(heure) {
@@ -46,7 +53,7 @@ function SuppQuot(tab){
 document.getElementById("importerCSV").addEventListener("click", function() {
 const fichierCSV = document.getElementById("fichierCSV").files[0];
 init_date = document.getElementById("dateIni").value;
-heure1 = document.getElementById("heureIni").value;
+heure1 = document.getElementById('timeIn').value;
 
 // console.log("Date Initiale:", init_date);
 // console.log("Heure Initiale:", heure1);
@@ -55,9 +62,8 @@ heure1 = document.getElementById("heureIni").value;
 if (Joyce >= dateActuel) {
         if (fichierCSV) {
             const reader = new FileReader();reader.onload = function(e) {const contenuCSV = e.target.result; jsonBruite = convertirCSVenJSON(contenuCSV); }; reader.readAsText(fichierCSV);
-        } 
-        else { alert("Veuillez sélectionner un fichier CSV."); }   
-  } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
+        } else { alert("Veuillez sélectionner un fichier CSV."); }   
+    } else { alert("votre periode d'essay sont expirée . Veuillez acheter cette produit");  }
 });
 
 
@@ -145,9 +151,7 @@ return affdata(filteredDataF);
 }
 
 function suppLigne(data){
-    let dataP=data.forEach(element =>{     
-        return element.sName;
-    })
+    let dataP=data.forEach(element =>{  return element.sName; })
     var Data=data;
     // Parcourir chaque élément du JSON d'origine
     for (var i = 0; i < Data.length; i++) {
@@ -167,51 +171,53 @@ function dataRecu() {
 
 
 function affdata(data2) {
-
-        viderTableau();
-
-
+    viderTableau()
     const ddd=document.querySelector("#popUp")
     ddd.style.display = 'none';
 
-            let perPresent=0;
-            let perRetard=0;
-            let perAbsent=0
-            let newData=[];
-            let dataFiltered =data2
-            let cleanedData = dataFiltered.map(item => { return { sJobNo: item.sJobNo.startsWith("'") ? item.sJobNo.slice(1) : item.sJobNo,sName: item.sName.startsWith("'") ? item.sName.slice(1) : item.sName,Date: item.Date,Time: item.Time }; });
+    let perPresent=0;
+    let perRetard=0;
+    let perAbsent=0
+    
 
-            Personne.forEach(E1=>{         
-                const E2 = cleanedData.map(element => element.sName);
-                const existe = E2.includes(E1);
-                console.log(  cleanedData);
-                    if (existe ==false && E1!='NULL'){ 
-                        newData.push({'id':E1.id,'nom':E1,'pdp':E1.nom,'poste':E1.poste,'Date': '--/--/----','Time': '--:--:--','status':'Absent'})  
-                        perAbsent= perAbsent+1
-                    }
-                    else if(existe ==true && E1!='NULL'){
-                        let achille = cleanedData.find(er=>{ return er.sName === E1; });
-                        let st =''; st=(compareT(achille.Time,heure1)) ; newData.push({'id':achille.sJobNo ,'nom':achille.sName,'pdp':E1.nom,'poste':E1.poste,"Date": achille.Date,"Time":achille.Time,'status':st});
-                        perPresent =perPresent +1
+    let dataFiltered =data2
+    let cleanedData = dataFiltered.map(item => { return { sJobNo: item.sJobNo.startsWith("'") ? item.sJobNo.slice(1) : item.sJobNo,sName: item.sName.startsWith("'") ? item.sName.slice(1) : item.sName,Date: item.Date,Time: item.Time }; });
+    alert(dataPrepared)
 
-                        dateModification =achille.Date;
-                    }
-            })
+    if(dataPrepared == true)     
+        Personne.forEach(E1=>{         
+            const E2 = cleanedData.map(element => element.sName);
+            const existe = E2.includes(E1);
+            console.log(  cleanedData);
+                if (existe ==false && E1!='NULL'){  newData.push({'id':E1.id,'nom':E1,'pdp':E1.nom,'poste':E1.poste,'Date': '--/--/----','Time': '--:--:--','status':'Absent'})  
+                    perAbsent= perAbsent+1
+                }
 
+                
+                else if(existe ==true && E1!='NULL'){
+                    let achille = cleanedData.find(er=>{ return er.sName === E1; });  
+                    let st =''; st=(compareT(achille.Time,heure1)) ; 
+                    newData.push({'id':achille.sJobNo ,'nom':achille.sName,'pdp':E1.nom,'poste':E1.poste,"Date": achille.Date,"Time":achille.Time,'status':st});
+                    perPresent =perPresent +1
+
+                    dateModification = achille.Date
+                  
+                }
+        })
 
             // ************************************************************************
 
-        // Obtenez une référence à la table et au tbody
-        const tableau = document.getElementById("tabmodel");
-        const tbody = tableau.querySelector("tbody");
+    // Obtenez une référence à la table et au tbody
+    const tableau = document.getElementById("tabmodel");
+    const tbody = tableau.querySelector("tbody");
 
-        newData.forEach(function (i) {           
-            const ligne = document.createElement("tr"); // Créez une nouvelle ligne
-            // Créez et ajoutez la cellule pour la personne
-            const personneCellule = document.createElement("td");
-            personneCellule.className = "people";
+    newData.forEach(function (i) {           
+        const ligne = document.createElement("tr"); // Créez une nouvelle ligne
+        // Créez et ajoutez la cellule pour la personne
+        const personneCellule = document.createElement("td");
+        personneCellule.className = "people";
 
-            
+
         // Créez l'image avec un événement `onclick`
         const img = document.createElement("img");
         let imgs = 'images/' + i.nom + '.jpg';
@@ -228,67 +234,60 @@ function affdata(data2) {
         ligne.appendChild(personneCellule);
         document.getElementById("tabmodel").appendChild(ligne);
         const ddEdit=document.querySelector("#popUpEdit")
-        const editHeure=document.querySelector("#editHeure")
+        
         const editNom=document.querySelector("#editNom")
 
         function editerLigne(rowIndex) {
-            // alert("Édition de la ligne avec l'index HTML : " + rowIndex); // Correction de la syntaxe de `alert`
+
             ddEdit.style.display = 'flex';
             editNom.textContent=newData[rowIndex-1].nom;
             editSelect=newData[rowIndex-1].Time;
-      
+            nomSelect=newData[rowIndex-1].nom;
+            document.getElementById("editValue").value = newData[rowIndex-1].Time;
+
+        
         }
-            
+        
 
-            console.log('images'+imgs);
-            img.alt = "";
-            const divPeopleDe = document.createElement("div");
-            divPeopleDe.className = "people-de";
-            const h5Name = document.createElement("h5");
-            h5Name.textContent = i.nom;
-            const pEmail = document.createElement("p");
-            pEmail.textContent = '';
-            divPeopleDe.appendChild(h5Name);
-            divPeopleDe.appendChild(pEmail);
-            personneCellule.appendChild(img);
-            personneCellule.appendChild(divPeopleDe);
-            ligne.appendChild(personneCellule);
-
-    
+        console.log('images'+imgs);
+        img.alt = "";
+        const divPeopleDe = document.createElement("div");
+        divPeopleDe.className = "people-de";
+        const h5Name = document.createElement("h5");
+        h5Name.textContent = i.nom;
+        const pEmail = document.createElement("p");
+        pEmail.textContent = '';
+        divPeopleDe.appendChild(h5Name);
+        divPeopleDe.appendChild(pEmail);
+        personneCellule.appendChild(img);
+        personneCellule.appendChild(divPeopleDe);
+        ligne.appendChild(personneCellule);
 
 
 
-            // Créez et ajoutez la cellule pour le rôle
-            const roleCellule = document.createElement("td");
-            roleCellule.className = "role";
-            const pRole = document.createElement("p");
-            pRole.textContent = i.Date;
-            roleCellule.appendChild(pRole);
-            ligne.appendChild(roleCellule);
+        // Créez et ajoutez la cellule pour le rôle
+        const roleCellule = document.createElement("td");
+        roleCellule.className = "role";
+        const pRole = document.createElement("p");
+        pRole.textContent = i.Date;
+        roleCellule.appendChild(pRole);
+        ligne.appendChild(roleCellule);
 
-            // Créez et ajoutez la cellule pour l'édition
-            const editCellule = document.createElement("td");
-            editCellule.className = "edit";
-            const aEdit = document.createElement("a");
-            aEdit.href = "#";
-            aEdit.textContent = i.Time;
-            editCellule.appendChild(aEdit);
-            ligne.appendChild(editCellule);
+        // Créez et ajoutez la cellule pour l'édition
+        const editCellule = document.createElement("td");
+        editCellule.className = "edit";
+        const aEdit = document.createElement("a");
+        aEdit.href = "#";
+        aEdit.textContent = i.Time;
+        editCellule.appendChild(aEdit);
+        ligne.appendChild(editCellule);
 
-            if(i.status=='Retard'){
-                ligne.style.backgroundColor='#ffbf0050';
-                perRetard =perRetard+1;
-            };
-            
-            if(i.status=='Absent'){
-                ligne.style.backgroundColor='#e45d9a5b';
-            }
+        if(i.status=='Retard'){ ligne.style.backgroundColor='#ffbf0050'; perRetard =perRetard+1; };
+        
+        if(i.status=='Absent'){ligne.style.backgroundColor='#e45d9a5b';}
+        tbody.appendChild(ligne);
 
-
-            // Ajoutez la ligne au tbody
-            tbody.appendChild(ligne);
-
-        });
+    });
 
 
 
@@ -312,6 +311,7 @@ function affdata(data2) {
         
 }
 
+
 let btnStat=0
 
 // fonctiond impression
@@ -334,7 +334,7 @@ function menuL(){
 const a=document.querySelector(".val-box");
 const b=document.querySelector("#nav2-btn")
 const c=document.querySelector("#dateIni")
-const d=document.querySelector("#heureIni")
+const d=document.querySelector("#timeIn")
  
  function imprimerFormulaire() {
     
@@ -360,22 +360,42 @@ function compareT(time1, time2) {
     if (date1 > date2) { return 'Retard'; } else if (date1 < date2) {  return 'Normal';}
 }
 
-
-
 const dd=document.querySelector("#popUp")
+function Tele(){ dd.style.display = 'flex';};
+function Cancel(){ dd.style.display = 'none';};
+function editCancel(){document.querySelector("#popUpEdit").style.display = 'none';};
 
 
-function Tele(){
-    dd.style.display = 'flex';
+function viderTableau() {const tableau = document.getElementById("tabmodel").getElementsByTagName("tbody")[0];tableau.innerHTML = "";}
 
-};
-function Cancel(){
-    dd.style.display = 'none';
+const editHeureIni=document.querySelector('#editValue');
 
-};
+function upDate(){
 
-function viderTableau() {
-    const tableau = document.getElementById("tabmodel").getElementsByTagName("tbody")[0];
-    tableau.innerHTML = ""; // Vide le contenu du <tbody>
+    viderTableau(); 
+    editCancel();
+
+    var s=editHeureIni.value; 
+    let index = newData.findIndex(personne => personne.nom === nomSelect);
+
+    if (index !== -1) {
+
+        let tm=editHeureIni.value+':00';
+
+        newData[index].Time =tm; 
+        newData[index].Date =dateModification;
+ 
+    }
+
+    dataPrepared = false;
+
+console.log('new data');
+
+    console.log(newData); 
+  
+  
 }
+
+
+
 
