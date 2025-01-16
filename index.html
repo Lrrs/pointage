@@ -57,7 +57,6 @@
         <img src="images/tele.png" alt="" style="height: 30px;width: 150px; margin-left: 30px; border-radius: 8px;" onclick="Tele()">
 
     </div>
-
     <div id="nav2-btn">
         <img src="images/imp.png" alt="" onclick="imprimerFormulaire()" style="cursor: pointer;">
     </div>
@@ -71,7 +70,7 @@
                         <i class="far fa-search"></i>
                         <!-- <input type="text" placeholder="Search"> -->
                         <input type="date" id="dateIni" required style="margin:10px; " >
-                        <input type="time" id="heureIni" required value="07:00" style="margin:10px; ">
+                        <input type="time" id="timeIn" required value="07:00" style="margin:10px; ">
                     </div>
 
                         <div class="file_" ><input type="file" id="fichierCSV" accept=".csv"  style="width: 300px ; background-color:#ffff; margin:10px; "></div>
@@ -81,6 +80,23 @@
                         <button type="button" onclick="Cancel()" style="color: red;border-color: red;background-color: #c7a6a686;cursor: pointer;">Cancel</button>
                        </div> 
 
+                </div>
+
+            </div>
+
+            <div id="popUpEdit">
+
+                <div id="edit"  >
+                    <label for="Nom" id="editNom">Prénom</label>
+                    <div class="search">
+                        <input type="time" id="editValue" required value="--:--:--" placeholder='--:--:--' style="margin:10px; ">
+                    </div>
+
+                        <img src="images/yes.png" alt="" onclick=" upDate()" style="cursor: pointer;height:50px;width: 50px;margin-right:20px;">
+
+                        <!-- <button type="button" id="importerCSV" style="color: rgb(2, 120, 47);border-color: rgb(2, 120, 47);background-color: #ffff;cursor: pointer;">Valider</button>  -->
+                            <img src="images/cancel.svg" alt="" onclick="editCancel()" style="cursor: pointer;height:25px;width: 25px;">
+                        </div>
                 </div>
 
             </div>
